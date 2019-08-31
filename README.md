@@ -12,4 +12,4 @@ PDF Toolbox is a free and open source Windows program that can merge, split, and
 ![Screenshot](https://github.com/JohnSpahr/PDFToolbox/blob/master/Screenshot.PNG?raw=true)
 
 ## Official Website
-Offical website: https://tectrasystems.org.
+Offical website: https://tectrasystems.org/pdf-toolbox.
