@@ -43,19 +43,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.richTextToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tectraWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.textToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitHubPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -206,6 +207,21 @@
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // programToolStripMenuItem
+            // 
+            this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.programToolStripMenuItem.Name = "programToolStripMenuItem";
+            this.programToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
+            this.programToolStripMenuItem.Text = "Program";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
             // convertToolStripMenuItem
             // 
             this.convertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -220,28 +236,36 @@
             // imageToPDFToolStripMenuItem
             // 
             this.imageToPDFToolStripMenuItem.Name = "imageToPDFToolStripMenuItem";
-            this.imageToPDFToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.imageToPDFToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.imageToPDFToolStripMenuItem.Text = "Image to PDF";
             this.imageToPDFToolStripMenuItem.Click += new System.EventHandler(this.ImageToPDFToolStripMenuItem_Click);
             // 
             // splitPDFToolStripMenuItem
             // 
             this.splitPDFToolStripMenuItem.Name = "splitPDFToolStripMenuItem";
-            this.splitPDFToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.splitPDFToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.splitPDFToolStripMenuItem.Text = "Split PDF by pages";
             this.splitPDFToolStripMenuItem.Click += new System.EventHandler(this.SplitPDFToolStripMenuItem_Click);
             // 
             // richTextToPDFToolStripMenuItem
             // 
             this.richTextToPDFToolStripMenuItem.Name = "richTextToPDFToolStripMenuItem";
-            this.richTextToPDFToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.richTextToPDFToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.richTextToPDFToolStripMenuItem.Text = "Create blank PDF";
             this.richTextToPDFToolStripMenuItem.Click += new System.EventHandler(this.RichTextToPDFToolStripMenuItem_Click);
+            // 
+            // textToPDFToolStripMenuItem
+            // 
+            this.textToPDFToolStripMenuItem.Name = "textToPDFToolStripMenuItem";
+            this.textToPDFToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.textToPDFToolStripMenuItem.Text = "Text file to PDF";
+            this.textToPDFToolStripMenuItem.Click += new System.EventHandler(this.TextToPDFToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tectraWebsiteToolStripMenuItem,
+            this.gitHubPageToolStripMenuItem,
             this.toolStripSeparator1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -251,43 +275,28 @@
             // tectraWebsiteToolStripMenuItem
             // 
             this.tectraWebsiteToolStripMenuItem.Name = "tectraWebsiteToolStripMenuItem";
-            this.tectraWebsiteToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
-            this.tectraWebsiteToolStripMenuItem.Text = "Tectra Website";
+            this.tectraWebsiteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.tectraWebsiteToolStripMenuItem.Text = "John\'s Website";
             this.tectraWebsiteToolStripMenuItem.Click += new System.EventHandler(this.TectraWebsiteToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
-            // textToPDFToolStripMenuItem
+            // gitHubPageToolStripMenuItem
             // 
-            this.textToPDFToolStripMenuItem.Name = "textToPDFToolStripMenuItem";
-            this.textToPDFToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.textToPDFToolStripMenuItem.Text = "Text file to PDF";
-            this.textToPDFToolStripMenuItem.Click += new System.EventHandler(this.TextToPDFToolStripMenuItem_Click);
-            // 
-            // programToolStripMenuItem
-            // 
-            this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.programToolStripMenuItem.Name = "programToolStripMenuItem";
-            this.programToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
-            this.programToolStripMenuItem.Text = "Program";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            this.gitHubPageToolStripMenuItem.Name = "gitHubPageToolStripMenuItem";
+            this.gitHubPageToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gitHubPageToolStripMenuItem.Text = "GitHub Page";
+            this.gitHubPageToolStripMenuItem.Click += new System.EventHandler(this.GitHubPageToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -347,6 +356,7 @@
         private System.Windows.Forms.ToolStripMenuItem textToPDFToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem programToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gitHubPageToolStripMenuItem;
     }
 }
 

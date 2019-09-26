@@ -13,6 +13,7 @@ using PdfSharp.Pdf.IO;
 using System.IO;
 using PdfSharp.Drawing;
 using MigraDoc.RtfRendering;
+using System.Diagnostics;
 
 namespace PDF_Merger
 {
@@ -270,6 +271,12 @@ namespace PDF_Merger
         {
             //Closes program
             this.Close();
+        }
+
+        private void GitHubPageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //github
+            Process.Start("https://github.com/johnspahr/pdftoolbox");
         }
     }
 }
