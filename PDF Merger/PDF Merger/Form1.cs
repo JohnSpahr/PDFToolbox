@@ -27,24 +27,28 @@ namespace PDF_Merger
         private void Button1_Click(object sender, EventArgs e)
         {
             //add pdf
+            openFileDialog1.Multiselect = true;
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //add selected PDF file to listbox
-                var file = openFileDialog1.FileName;
-                listBox1.Items.Add(file);
+                //add selected PDF files to listbox
+                foreach (var file in openFileDialog1.FileNames)
+                {
+                    pdfList.Items.Add(file);
+                }
             }
         }
 
         private void RemoveBtn_Click(object sender, EventArgs e)
         {
             //remove pdf
-            ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(listBox1);
+            ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(pdfList);
 
-            if (listBox1.SelectedIndex != -1)
+            if (pdfList.SelectedIndex != -1)
             {
                 //Removes item
                 for (int i = selectedItems.Count - 1; i >= 0; i--)
-                    listBox1.Items.Remove(selectedItems[i]);
+                    pdfList.Items.Remove(selectedItems[i]);
             }
             else
             {
@@ -57,17 +61,18 @@ namespace PDF_Merger
             if (MessageBox.Show("Are you sure you want to clear the list box?", "PDF Merger", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 //clears listbox items
-                listBox1.Items.Clear();
+                pdfList.Items.Clear();
             }
         }
 
         private void MergeBtn_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count > 1)
+            saveFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf";
+            if (pdfList.Items.Count > 1)
             {
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    var List = listBox1.Items.Cast<String>().ToList(); //creates list of items in listbox
+                    var List = pdfList.Items.Cast<String>().ToList(); //creates list of items in listbox
 
                     PdfDocument outputDocument = new PdfDocument(); //creates output document
 
@@ -103,22 +108,22 @@ namespace PDF_Merger
 
         public void MoveItem(int direction)
         {
-            if (listBox1.SelectedItem == null || listBox1.SelectedIndex < 0)
+            if (pdfList.SelectedItem == null || pdfList.SelectedIndex < 0)
                 return; //no selected item
 
-            int newIndex = listBox1.SelectedIndex + direction;
+            int newIndex = pdfList.SelectedIndex + direction;
 
-            if (newIndex < 0 || newIndex >= listBox1.Items.Count)
+            if (newIndex < 0 || newIndex >= pdfList.Items.Count)
                 return;
 
-            object selected = listBox1.SelectedItem; //selected item
+            object selected = pdfList.SelectedItem; //selected item
 
             //removing removable element
-            listBox1.Items.Remove(selected);
+            pdfList.Items.Remove(selected);
             //inserts in new location
-            listBox1.Items.Insert(newIndex, selected);
+            pdfList.Items.Insert(newIndex, selected);
             //restore selection
-            listBox1.SetSelected(newIndex, true);
+            pdfList.SetSelected(newIndex, true);
         }
 
         private void DownBtn_Click(object sender, EventArgs e)
@@ -158,6 +163,8 @@ namespace PDF_Merger
         private void SplitPDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Split PDF by pages
+            openFileDialog1.Multiselect = false;
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 //Creates folder browser dialog called folder
@@ -277,6 +284,15 @@ namespace PDF_Merger
         {
             //github
             Process.Start("https://github.com/johnspahr/pdftoolbox");
+        }
+
+        private void listBox1_MouseHover(object sender, EventArgs e)
+        {
+            //When mouse is hovered
+            if (pdfList.SelectedItem != null)
+            {
+                toolTip1.SetToolTip(pdfList, pdfList.GetItemText(pdfList.SelectedItem));
+            }
         }
     }
 }

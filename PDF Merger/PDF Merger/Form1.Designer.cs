@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.pdfList = new System.Windows.Forms.ListBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.removeBtn = new System.Windows.Forms.Button();
@@ -52,24 +52,25 @@
             this.textToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tectraWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitHubPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.gitHubPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBox1
+            // pdfList
             // 
-            this.listBox1.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 27;
-            this.listBox1.Location = new System.Drawing.Point(13, 72);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox1.Size = new System.Drawing.Size(462, 328);
-            this.listBox1.TabIndex = 0;
+            this.pdfList.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pdfList.FormattingEnabled = true;
+            this.pdfList.ItemHeight = 27;
+            this.pdfList.Location = new System.Drawing.Point(13, 72);
+            this.pdfList.Name = "pdfList";
+            this.pdfList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.pdfList.Size = new System.Drawing.Size(462, 328);
+            this.pdfList.TabIndex = 0;
+            this.pdfList.MouseHover += new System.EventHandler(this.listBox1_MouseHover);
             // 
             // addBtn
             // 
@@ -182,7 +183,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 19);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Version 1.1";
+            this.label1.Text = "Version 1.2";
             // 
             // label2
             // 
@@ -236,28 +237,28 @@
             // imageToPDFToolStripMenuItem
             // 
             this.imageToPDFToolStripMenuItem.Name = "imageToPDFToolStripMenuItem";
-            this.imageToPDFToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.imageToPDFToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.imageToPDFToolStripMenuItem.Text = "Image to PDF";
             this.imageToPDFToolStripMenuItem.Click += new System.EventHandler(this.ImageToPDFToolStripMenuItem_Click);
             // 
             // splitPDFToolStripMenuItem
             // 
             this.splitPDFToolStripMenuItem.Name = "splitPDFToolStripMenuItem";
-            this.splitPDFToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.splitPDFToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.splitPDFToolStripMenuItem.Text = "Split PDF by pages";
             this.splitPDFToolStripMenuItem.Click += new System.EventHandler(this.SplitPDFToolStripMenuItem_Click);
             // 
             // richTextToPDFToolStripMenuItem
             // 
             this.richTextToPDFToolStripMenuItem.Name = "richTextToPDFToolStripMenuItem";
-            this.richTextToPDFToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.richTextToPDFToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.richTextToPDFToolStripMenuItem.Text = "Create blank PDF";
             this.richTextToPDFToolStripMenuItem.Click += new System.EventHandler(this.RichTextToPDFToolStripMenuItem_Click);
             // 
             // textToPDFToolStripMenuItem
             // 
             this.textToPDFToolStripMenuItem.Name = "textToPDFToolStripMenuItem";
-            this.textToPDFToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.textToPDFToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.textToPDFToolStripMenuItem.Text = "Text file to PDF";
             this.textToPDFToolStripMenuItem.Click += new System.EventHandler(this.TextToPDFToolStripMenuItem_Click);
             // 
@@ -275,28 +276,28 @@
             // tectraWebsiteToolStripMenuItem
             // 
             this.tectraWebsiteToolStripMenuItem.Name = "tectraWebsiteToolStripMenuItem";
-            this.tectraWebsiteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.tectraWebsiteToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.tectraWebsiteToolStripMenuItem.Text = "John\'s Website";
             this.tectraWebsiteToolStripMenuItem.Click += new System.EventHandler(this.TectraWebsiteToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // gitHubPageToolStripMenuItem
             // 
             this.gitHubPageToolStripMenuItem.Name = "gitHubPageToolStripMenuItem";
-            this.gitHubPageToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gitHubPageToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.gitHubPageToolStripMenuItem.Text = "GitHub Page";
             this.gitHubPageToolStripMenuItem.Click += new System.EventHandler(this.GitHubPageToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(185, 6);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -312,14 +313,14 @@
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.removeBtn);
             this.Controls.Add(this.addBtn);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.pdfList);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "PDF Toolbox v1.1";
+            this.Text = "PDF Toolbox v1.2";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -330,7 +331,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox pdfList;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button removeBtn;
