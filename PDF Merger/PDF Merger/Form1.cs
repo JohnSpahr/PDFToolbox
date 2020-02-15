@@ -1,4 +1,6 @@
 ﻿using System;
+using MaterialSkin.Controls;
+using MaterialSkin.Animations;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,19 +14,24 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System.IO;
 using PdfSharp.Drawing;
-using MigraDoc.RtfRendering;
 using System.Diagnostics;
+using MaterialSkin;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace PDF_Merger
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MaterialForm
     {
         public Form1()
         {
             InitializeComponent();
+            //Initializes MaterialSkin
+            var manager = MaterialSkinManager.Instance;
+            manager.Theme = MaterialSkinManager.Themes.DARK;
+            manager.ColorScheme = new ColorScheme(Primary.Blue900, Primary.Blue800, Primary.Blue500, Accent.LightBlue200, TextShade.WHITE);
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void AddBtn_Click(object sender, EventArgs e)
         {
             //add pdf
             openFileDialog1.Multiselect = true;
@@ -136,79 +143,129 @@ namespace PDF_Merger
         {
             //sets file dialog filters when form loads
             openFileDialog1.Filter = "PDF Files (*.pdf)|*.pdf";
-            openFileDialog2.Filter = "JPEG Files (*.jpg)|*.jpg";
-            saveFileDialog2.Filter = "PDF Files (*.pdf)|*.pdf";
+            imageOpenDialog.Filter = "JPEG Files (*.jpg)|*.jpg";
+            imageSaveDialog.Filter = "PDF Files (*.pdf)|*.pdf";
+            //other setup stuff
+            materialTabSelector1.BaseTabControl = materialTabControl1;
         }
 
         private void ImageToPDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //image to pdf
-            if (openFileDialog2.ShowDialog() == DialogResult.OK)
+            DialogResult result = MessageBox.Show("Do you want to automatically change the PDF page size to ensure that your image fits?", "PDF Toolbox", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
             {
-                var document = new PdfDocument(); //new document
-                document.Pages.Add(new PdfPage()); //creates blank page
-                XGraphics xgr = XGraphics.FromPdfPage(document.Pages[0]); //gets graphics in PDF
-                XImage img = XImage.FromFile(openFileDialog2.FileName); //gets image
-                xgr.DrawImage(img, 0, 0); //draws image in PDF
-                if (saveFileDialog2.ShowDialog() == DialogResult.OK)
+                //set page size to image size.
+                if (imageOpenDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string filepath = saveFileDialog2.FileName;
-                    document.Save(filepath);
-                    System.Diagnostics.Process.Start(filepath); //starts file path
+                    var document = new PdfDocument(); //new document
+                    PdfPage pdfPage = new PdfPage(); //new pdf page
+                    Bitmap bmp = new Bitmap(imageOpenDialog.FileName); //make bitmap
+                    pdfPage.Width = bmp.Width; //sets pdf page width
+                    pdfPage.Height = bmp.Height; //sets pdf page height
+                    document.Pages.Add(pdfPage); //adds resized page
+                    XGraphics xgr = XGraphics.FromPdfPage(document.Pages[0]); //gets graphics in PDF
+                    XImage img = XImage.FromFile(imageOpenDialog.FileName); //gets image
+                    img.Interpolate = false; //turns of interpolation
+                    xgr.DrawImage(img, 0, 0); //draws image in PDF
+                    if (imageSaveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filepath = imageSaveDialog.FileName;
+                        document.Save(filepath);
+                        Process.Start(filepath); //starts file path
+                        MessageBox.Show("Operation complete.", "PDF Toolbox", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    document.Close();
                 }
-                document.Close();
+            }
+            else if (result == DialogResult.No)
+            {
+                //don't set page size to image size.
+                if (imageOpenDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var document = new PdfDocument(); //new document
+                    Bitmap bmp = new Bitmap(imageOpenDialog.FileName);
+                    document.Pages.Add(new PdfPage()); //creates blank page
+                    XGraphics xgr = XGraphics.FromPdfPage(document.Pages[0]); //gets graphics in PDF
+                    XImage img = XImage.FromFile(imageOpenDialog.FileName); //gets image
+                    img.Interpolate = false; //turns of interpolation
+                    xgr.DrawImage(img, 0, 0); //draws image in PDF
+                    if (imageSaveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filepath = imageSaveDialog.FileName;
+                        document.Save(filepath);
+                        Process.Start(filepath); //starts file path
+                        MessageBox.Show("Operation complete.", "PDF Toolbox", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    document.Close();
+                }
             }
         }
 
         private void SplitPDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Split PDF by pages
-            openFileDialog1.Multiselect = false;
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            try
             {
-                //Creates folder browser dialog called folder
-                FolderBrowserDialog folder = new FolderBrowserDialog();
-
-                if (folder.ShowDialog() == DialogResult.OK)
+                //creates new PDF document called inputDocument
+                PdfDocument inputDocument = PdfReader.Open(openFileDialog1.FileName, PdfDocumentOpenMode.Import);
+                //gets file to open's name without extension
+                string name = Path.GetFileNameWithoutExtension(openPath.Text);
+                //while current page isn't equivalent to total pages
+                for (int idx = 0; idx < inputDocument.PageCount; idx++)
                 {
-                    //creates new PDF document called inputDocument
-                    PdfDocument inputDocument = PdfReader.Open(openFileDialog1.FileName, PdfDocumentOpenMode.Import);
-                    //gets open file dialog file name without extension
-                    string name = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
-                    //while current page isn't equivalent to total pages
-                    for (int idx = 0; idx < inputDocument.PageCount; idx++)
-                    {
-                        PdfDocument outputDocument = new PdfDocument();
-                        //sets pdf settings and information.
-                        outputDocument.Version = inputDocument.Version;
-                        outputDocument.Info.Title = String.Format("Page {0} of {1}", idx + 1, inputDocument.Info.Title);
-                        outputDocument.Info.Creator = inputDocument.Info.Creator;
-                        //add the page and save it
-                        outputDocument.AddPage(inputDocument.Pages[idx]);
-                        outputDocument.Save(String.Format(folder.SelectedPath + @"\" + "{0} - Page {1}.pdf", name, idx + 1));
-                    }
-                    //shows the folder in which you saved your split PDF
-                    System.Diagnostics.Process.Start(folder.SelectedPath);
+                    PdfDocument outputDocument = new PdfDocument();
+                    //sets pdf settings and information.
+                    outputDocument.Version = inputDocument.Version;
+                    outputDocument.Info.Title = String.Format("Page {0} of {1}", idx + 1, inputDocument.Info.Title);
+                    outputDocument.Info.Creator = inputDocument.Info.Creator;
+                    //add the page and save it
+                    outputDocument.AddPage(inputDocument.Pages[idx]);
+                    outputDocument.Save(String.Format(folderPath.Text + @"\" + "{0} - Page {1}.pdf", name, idx + 1));
                 }
+                //shows the folder in which you saved your split PDF
+                System.Diagnostics.Process.Start(folderPath.Text);
+                //display message
+                MessageBox.Show("Operation complete.", "PDF Toolbox", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed to split PDF file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void RichTextToPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BlankPDF(object sender, EventArgs e)
         {
             //Create blank PDF.
-            var document = new PdfDocument();
-            document.Pages.Add(new PdfPage());
-
-            if (saveFileDialog2.ShowDialog() == DialogResult.OK)
+            try
             {
-                //string filepath is equal to save file dialog 2 file name
-                string filepath = saveFileDialog2.FileName;
-                //saves and closes document
-                document.Save(filepath);
-                document.Close();
-                //starts saved file
-                System.Diagnostics.Process.Start(filepath);
+                var document = new PdfDocument();
+                int count = 1;
+                document.Pages.Add(new PdfPage());
+
+                //create selected number of pages
+                while (count != pageNum.Value)
+                {
+                    document.Pages.Add(new PdfPage());
+                    count++;
+                }
+
+                if (imageSaveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //string filepath is equal to save file dialog 2 file name
+                    string filepath = imageSaveDialog.FileName;
+                    //saves and closes document
+                    document.Save(filepath);
+                    document.Close();
+                    //starts saved file
+                    System.Diagnostics.Process.Start(filepath);
+                }
+            } catch (Exception)
+            {
+                //If blank PDF can't be created.
+                MessageBox.Show("Failed to create blank PDF.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -261,10 +318,10 @@ namespace PDF_Merger
                         }
                     }
 
-                    if (saveFileDialog2.ShowDialog() == DialogResult.OK)
+                    if (imageSaveDialog.ShowDialog() == DialogResult.OK)
                     {
                         //if result is ok, save PDF file
-                        pdf.Save(saveFileDialog2.FileName);
+                        pdf.Save(imageSaveDialog.FileName);
                     }
                 }
 
@@ -292,6 +349,67 @@ namespace PDF_Merger
             if (pdfList.SelectedItem != null)
             {
                 toolTip1.SetToolTip(pdfList, pdfList.GetItemText(pdfList.SelectedItem));
+            }
+        }
+
+        private void openPdfBtn_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Multiselect = false;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                openPath.Text = openFileDialog1.FileName;
+            }
+        }
+
+        private void openFolderClick(object sender, EventArgs e)
+        {
+            //open folder
+            FolderBrowserDialog folder = new FolderBrowserDialog();
+
+            if (folder.ShowDialog() == DialogResult.OK)
+            {
+                folderPath.Text = folder.SelectedPath;
+            }
+        }
+
+        //HTML to PDF
+        private void htmlBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Set up open file dialog
+                htmlPDFDialog.Filter = "HTML files (*.html)|*.html";
+                htmlPDFDialog.Title = "Open HTML file";
+
+                //Open HTML file
+                if (htmlPDFDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //create new PDF document
+                    PdfDocument pdfDocument = new PdfDocument();
+
+                    //convert html to pdf
+                    string html = File.ReadAllText(htmlPDFDialog.FileName);
+                    PdfDocument final = PdfGenerator.GeneratePdf(html, PageSize.A4);
+
+                    //Save PDF
+                    saveHtmlPDFDialog.Filter = "PDF Files (*.pdf)|*.pdf";
+                    saveHtmlPDFDialog.Title = "Save PDF file";
+
+                    //Show SaveFileDialog
+                    if (saveHtmlPDFDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        //Save
+                        final.Save(saveHtmlPDFDialog.FileName);
+                        //Show PDF file and completion message
+                        Process.Start(saveHtmlPDFDialog.FileName);
+                        MessageBox.Show("Operation complete!", "PDF Toolbox", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to convert this HTML file to a PDF.", "PDF Toolbox", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
