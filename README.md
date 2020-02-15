@@ -5,8 +5,9 @@ PDF Toolbox is a free and open source Windows program that can merge, split, and
 1. Merge PDF files
 2. Convert image to PDF file
 3. Split PDF files by page
-4. Create blank PDF file
+4. Create blank PDF file (you can create multiple blank pages)
 5. Convert text file to PDF file
+6. Convert HTML file to PDF file
 
 ## Screenshot
 ![Screenshot](https://github.com/JohnSpahr/PDFToolbox/blob/master/Screenshot.PNG?raw=true)
