@@ -10,7 +10,7 @@ PDF Toolbox is a free and open source Windows program that can merge, split, and
 6. Convert HTML file to PDF file
 
 ## Screenshot
-![Screenshot](https://github.com/JohnSpahr/PDFToolbox/blob/master/Screenshot.PNG?raw=true)
+![Screenshot](https://github.com/JohnSpahr/PDFToolbox/blob/master/pdf%20toolbox%20screenshot.PNG?raw=true)
 
 ## Official Website
 Offical website: https://tectrasystems.org.
