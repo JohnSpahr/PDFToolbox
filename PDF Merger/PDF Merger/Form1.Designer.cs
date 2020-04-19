@@ -102,7 +102,7 @@
             this.pdfList.Location = new System.Drawing.Point(20, 45);
             this.pdfList.Name = "pdfList";
             this.pdfList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.pdfList.Size = new System.Drawing.Size(462, 302);
+            this.pdfList.Size = new System.Drawing.Size(492, 302);
             this.pdfList.TabIndex = 0;
             this.pdfList.MouseHover += new System.EventHandler(this.listBox1_MouseHover);
             // 
@@ -122,7 +122,7 @@
             this.upBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.upBtn.ForeColor = System.Drawing.Color.White;
             this.upBtn.Image = ((System.Drawing.Image)(resources.GetObject("upBtn.Image")));
-            this.upBtn.Location = new System.Drawing.Point(494, 45);
+            this.upBtn.Location = new System.Drawing.Point(533, 45);
             this.upBtn.Name = "upBtn";
             this.upBtn.Size = new System.Drawing.Size(48, 38);
             this.upBtn.TabIndex = 5;
@@ -137,7 +137,7 @@
             this.downBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.downBtn.ForeColor = System.Drawing.Color.White;
             this.downBtn.Image = ((System.Drawing.Image)(resources.GetObject("downBtn.Image")));
-            this.downBtn.Location = new System.Drawing.Point(494, 89);
+            this.downBtn.Location = new System.Drawing.Point(533, 89);
             this.downBtn.Name = "downBtn";
             this.downBtn.Size = new System.Drawing.Size(48, 38);
             this.downBtn.TabIndex = 6;
@@ -182,7 +182,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -201,26 +201,26 @@
             // tectraWebsiteToolStripMenuItem
             // 
             this.tectraWebsiteToolStripMenuItem.Name = "tectraWebsiteToolStripMenuItem";
-            this.tectraWebsiteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.tectraWebsiteToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.tectraWebsiteToolStripMenuItem.Text = "Tectra Website";
             this.tectraWebsiteToolStripMenuItem.Click += new System.EventHandler(this.TectraWebsiteToolStripMenuItem_Click);
             // 
             // gitHubPageToolStripMenuItem
             // 
             this.gitHubPageToolStripMenuItem.Name = "gitHubPageToolStripMenuItem";
-            this.gitHubPageToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gitHubPageToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.gitHubPageToolStripMenuItem.Text = "GitHub Page";
             this.gitHubPageToolStripMenuItem.Click += new System.EventHandler(this.GitHubPageToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -286,7 +286,7 @@
             this.mergeBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.mergeBtn.Depth = 0;
             this.mergeBtn.Icon = null;
-            this.mergeBtn.Location = new System.Drawing.Point(494, 171);
+            this.mergeBtn.Location = new System.Drawing.Point(533, 169);
             this.mergeBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mergeBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.mergeBtn.Name = "mergeBtn";
@@ -438,7 +438,7 @@
             // folderPath
             // 
             this.folderPath.Depth = 0;
-            this.folderPath.Hint = "Select a folder to save the output file at...";
+            this.folderPath.Hint = "Select a folder to save the output file in...";
             this.folderPath.Location = new System.Drawing.Point(86, 135);
             this.folderPath.MaxLength = 32767;
             this.folderPath.MouseState = MaterialSkin.MouseState.HOVER;
@@ -722,8 +722,11 @@
             this.Controls.Add(this.materialTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(747, 655);
+            this.MinimumSize = new System.Drawing.Size(747, 655);
             this.Name = "Form1";
-            this.Text = "PDF Toolbox v1.3";
+            this.Text = "PDF Toolbox v1.3.1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
