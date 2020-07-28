@@ -8,6 +8,8 @@ PDF Toolbox is a free and open source Windows program that can merge, split, and
 4. Create blank PDF file (you can create multiple blank pages)
 5. Convert text file to PDF file
 6. Convert HTML file to PDF file
+7. Compress PDF
+8. Remove page(s) from PDF
 
 ## Screenshot
 ![Screenshot](https://github.com/JohnSpahr/PDFToolbox/blob/master/pdf%20toolbox%20screenshot.PNG?raw=true)
