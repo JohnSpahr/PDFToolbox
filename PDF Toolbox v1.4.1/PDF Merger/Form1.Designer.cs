@@ -97,7 +97,6 @@
             this.removeOpenLbl = new System.Windows.Forms.Label();
             this.tabSelector = new MaterialSkin.Controls.MaterialTabSelector();
             this.htmlPDFDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveHtmlPDFDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.mergePage.SuspendLayout();
@@ -251,6 +250,14 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            // 
+            // imageSaveDialog
+            // 
+            this.imageSaveDialog.FileName = "PDF Files (*.pdf)|*.pdf";
+            // 
+            // imageOpenDialog
+            // 
+            this.imageOpenDialog.Filter = "JPEG Files (*.jpg)|*.jpg";
             // 
             // tabControl
             // 
@@ -1041,11 +1048,8 @@
             // htmlPDFDialog
             // 
             this.htmlPDFDialog.DefaultExt = "PDF";
-            this.htmlPDFDialog.Title = "Select PDF file";
-            // 
-            // saveHtmlPDFDialog
-            // 
-            this.saveHtmlPDFDialog.Title = "Save merged PDF";
+            this.htmlPDFDialog.Filter = "HTML files (*.html)|*.html";
+            this.htmlPDFDialog.Title = "Open HTML File";
             // 
             // Form1
             // 
@@ -1132,7 +1136,6 @@
         private System.Windows.Forms.NumericUpDown pageNum;
         private System.Windows.Forms.Button htmlBtn;
         private System.Windows.Forms.OpenFileDialog htmlPDFDialog;
-        private System.Windows.Forms.SaveFileDialog saveHtmlPDFDialog;
         private System.Windows.Forms.TabPage compressPage;
         private System.Windows.Forms.Label label15;
         private MaterialSkin.Controls.MaterialFlatButton openPDFtoCompressBtn;

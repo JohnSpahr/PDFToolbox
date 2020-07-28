@@ -161,9 +161,6 @@ namespace PDF_Merger
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //sets file dialog filters when form loads
-            imageOpenDialog.Filter = "JPEG Files (*.jpg)|*.jpg";
-            imageSaveDialog.Filter = "PDF Files (*.pdf)|*.pdf";
             //other setup stuff
             tabSelector.BaseTabControl = tabControl;
         }
@@ -188,7 +185,7 @@ namespace PDF_Merger
                     document.Pages.Add(pdfPage); //adds resized page
                     XGraphics xgr = XGraphics.FromPdfPage(document.Pages[0]); //gets graphics in PDF
                     XImage img = XImage.FromFile(imageOpenDialog.FileName); //gets image
-                    img.Interpolate = false; //turns of interpolation
+                    img.Interpolate = false; //turns off interpolation
                     xgr.DrawImage(img, 0, 0); //draws image in PDF
                     if (imageSaveDialog.ShowDialog() == DialogResult.OK)
                     {
@@ -421,10 +418,6 @@ namespace PDF_Merger
 
             try
             {
-                //Set up open file dialog
-                htmlPDFDialog.Filter = "HTML files (*.html)|*.html";
-                htmlPDFDialog.Title = "Open HTML file";
-
                 //Open HTML file
                 if (htmlPDFDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -435,17 +428,13 @@ namespace PDF_Merger
                     string html = File.ReadAllText(htmlPDFDialog.FileName);
                     PdfDocument final = PdfGenerator.GeneratePdf(html, PageSize.A4);
 
-                    //Save PDF
-                    saveHtmlPDFDialog.Filter = "PDF Files (*.pdf)|*.pdf";
-                    saveHtmlPDFDialog.Title = "Save PDF file";
-
                     //Show SaveFileDialog
-                    if (saveHtmlPDFDialog.ShowDialog() == DialogResult.OK)
+                    if (pdfSave.ShowDialog() == DialogResult.OK)
                     {
                         //Save
-                        final.Save(saveHtmlPDFDialog.FileName);
-                        //Show PDF file and completion message
-                        Process.Start(saveHtmlPDFDialog.FileName);
+                        final.Save(pdfSave.FileName);
+                        //Start PDF file
+                        Process.Start(pdfSave.FileName);
                     }
                 }
             }
