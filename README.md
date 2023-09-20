@@ -1,6 +1,8 @@
 # PDF Toolbox
 PDF Toolbox is a free and open source Windows program that can merge, split, and create PDF files. It is open source, under the MIT license. Best of all, it's completely free! PDF Toolbox was written exclusively by John Spahr but has been discontinued.
 
+## I wrote most of this in 8th grade so the code is a mess!
+
 ## Features
 1. Merge PDF files
 2. Convert image to PDF file
